@@ -1,0 +1,48 @@
+{% extends 'backend/main_layout.html' %}
+{% load static %}
+{% block title %} รายการสินค้า {% endblock %}
+{% block content %}
+
+<div class="card mx-4 my-5">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>รายการสินค้า</h4>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="#" class="btn btn-success">+ เพิ่มสินค้าใหม่</a>
+            </div>
+        </div>
+    </div><!-- card-header -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ภาพ</th>
+                <th>ชื่อสินค้า</th>
+                <th>บาร์โค้ด</th>
+                <th>จำนวน</th>
+                <th>ราคา</th>
+                <th>สถานะ</th>
+                <th>จัดการ</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in '012345789' %}
+                <tr>
+                    <td><img src="{% static '/backend/img/1.jpg' %}" height="30" /></td>
+                    <td>เสื้อยืด</td>
+                    <td>123456789</td>
+                    <td>10</td>
+                    <td>100</td>
+                    <td>มีสินค้า</td>
+                    <td>
+                        <a href="#" class="btn btn-sm btn-warning">แก้ไข</a>
+                        <a href="#" class="btn btn-sm btn-danger">ลบ</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

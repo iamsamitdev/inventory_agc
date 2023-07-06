@@ -75,6 +75,7 @@ WSGI_APPLICATION = 'inventory.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# SQLite
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -82,6 +83,7 @@ WSGI_APPLICATION = 'inventory.wsgi.application'
 #     }
 # }
 
+# MySQL
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

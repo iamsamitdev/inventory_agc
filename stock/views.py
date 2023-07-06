@@ -7,3 +7,15 @@ def index(request):
 # ฟังก์ชันเรียกหน้า login.html
 def login(request):
     return render(request, 'auth/login.html')
+
+# ฟังก์ชันเรียกหน้า register.html
+def register(request):
+    return render(request, 'auth/register.html')
+
+# ฟังก์ชันเรียกหน้า dashboard.html
+def dashboard(request):
+    return render(request, 'backend/dashboard.html')
+
+# ฟังก์ชันเรียกหน้า product.html
+def product(request):
+    return render(request, 'backend/product.html')
