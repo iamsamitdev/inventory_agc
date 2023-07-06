@@ -7,3 +7,9 @@ class RegisterForm(forms.Form):
     email = forms.EmailField(max_length=100)
     username = forms.CharField(max_length=100)
     password = forms.CharField(widget=forms.PasswordInput)
+
+
+# สร้างคลาส LoginForm สำหรับใช้ในการ validate ข้อมูลจากฟอร์ม
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=100)
+    password = forms.CharField(widget=forms.PasswordInput)
