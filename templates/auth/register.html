@@ -17,46 +17,60 @@
                         <h1 class="h4 text-gray-900 mb-4">ลงทะเบียนเข้าใช้งาน</h1>
                     </div>
 
-                    {% if messages %}
-                        {% for message in messages %}
-                            {{ message|safe }}
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                        {% for error in form.non_field_errors %}
+                                {{ error }}
                         {% endfor %}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
                     {% endif %}
 
-                    <form class="user" action="/register" method="post">
+                    <form class="user" action="{% url 'register' %}" method="post" novalidate>
                         {% csrf_token %}
+
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-user" 
-                            id="firstname" 
-                            name="firstname"
-                            placeholder="First Name">
+                            {{ form.firstname }}
+                            {% for error in form.firstname.errors %}
+                                <div class="text-danger my-2">{{ error }}</div>
+                            {% endfor %}
                         </div>
 
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-user" 
-                            id="lastname" 
-                            name="lastname"
-                            placeholder="Last Name">
+                            {{ form.lastname }}
+                            {% for error in form.lastname.errors %}
+                                <div class="text-danger my-2">{{ error }}</div>
+                            {% endfor %}
                         </div>
 
                         <div class="form-group">
-                            <input type="email" class="form-control form-control-user" 
-                            id="email" 
-                            name="email"
-                            placeholder="Email Address">
+                            {{ form.email }}
+                            {% for error in form.email.errors %}
+                                <div class="text-danger my-2">{{ error }}</div>
+                            {% endfor %}
                         </div>
 
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-user" 
-                            id="username" 
-                            name="username"
-                            placeholder="Username">
+                            {{ form.username }}
+                            {% for error in form.username.errors %}
+                                <div class="text-danger my-2">{{ error }}</div>
+                            {% endfor %}
                         </div>
-        
+
                         <div class="form-group">
-                            <input type="password" class="form-control form-control-user" id="password"
-                            name="password" 
-                            placeholder="Password">
+                            {{ form.password1 }}
+                            {% for error in form.password1.errors %}
+                                <div class="text-danger my-2">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.password2 }}
+                            {% for error in form.password2.errors %}
+                                <div class="text-danger my-2">{{ error }}</div>
+                            {% endfor %}
                         </div>
                         
                         <input type="submit" value="ลงทะเบียน" class="btn btn-primary btn-user btn-block" />

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
+# from subprocess import Popen
 import os
 import sys
 
@@ -7,6 +8,10 @@ import sys
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'inventory.settings')
+    # p1 = Popen(['python', 'manage.py', 'runserver'])
+    # p2 = Popen(['streamlit', 'run', 'dashboardrealtime.py'])
+    # p1.wait()
+    # p2.wait()
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
