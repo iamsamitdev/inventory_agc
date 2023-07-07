@@ -10,7 +10,7 @@
                 <h4>รายการสินค้า</h4>
             </div>
             <div class="col-md-6 text-right">
-                <a href="#" class="btn btn-success">+ เพิ่มสินค้าใหม่</a>
+                <a href="{% url 'create_product' %}" class="btn btn-success">+ เพิ่มสินค้าใหม่</a>
             </div>
         </div>
     </div><!-- card-header -->
@@ -27,14 +27,14 @@
             </tr>
         </thead>
         <tbody>
-            {% for i in '012345789' %}
+            {% for product in products %}
                 <tr>
-                    <td><img src="{% static '/backend/img/1.jpg' %}" height="30" /></td>
-                    <td>เสื้อยืด</td>
-                    <td>123456789</td>
-                    <td>10</td>
-                    <td>100</td>
-                    <td>มีสินค้า</td>
+                    <td><img src="{{ product.product_image }}" height="30" /></td>
+                    <td>{{ product.product_name }}</td>
+                    <td>{{ product.product_barcode }}</td>
+                    <td>{{ product.product_qty }}</td>
+                    <td>{{ product.product_price }}</td>
+                    <td>{{ product.product_status }}</td>
                     <td>
                         <a href="#" class="btn btn-sm btn-warning">แก้ไข</a>
                         <a href="#" class="btn btn-sm btn-danger">ลบ</a>

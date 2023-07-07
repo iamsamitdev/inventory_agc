@@ -1,0 +1,60 @@
+{% extends 'backend/main_layout.html' %}
+{% load static %}
+{% block title %} Report {% endblock %}
+{% block content %}
+
+<div class="card mx-4 my-5">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>รายงานยอดขาย</h4>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="#" class="btn btn-success">export</a>
+            </div>
+        </div>
+    </div><!-- card-header -->
+
+    <!-- แสดง Chart -->
+    <div class="my-4 mx-4">
+        <canvas id="myChart"></canvas>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block footer_scripts  %}
+    {{ block.super }}
+    <script src="{% static './backend/vendor/chart.js/Chart.min.js' %}"></script>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ x_values|safe }},
+                datasets: [{
+                    label: 'Data Points',
+                    lineTension: 0.3,
+                    data: {{ y_values|safe }},
+                    // backgroundColor: "rgba(78, 115, 223, 0.05)",
+                    borderColor: "rgba(0, 0, 0, 1)",
+                    pointRadius: 3,
+                    borderWidth: 5,
+                    pointStyle: 'square',
+                    // pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                    // pointBorderColor: "rgba(78, 115, 223, 1)",
+                    // pointHoverRadius: 3,
+                    // pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                    // pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                    // pointHitRadius: 10,
+                    // pointBorderWidth: 2,
+                    // fill: true
+                }]
+            },
+            options: {
+                // Configure other chart options here
+            }
+        });
+    </script>
+{% endblock %}

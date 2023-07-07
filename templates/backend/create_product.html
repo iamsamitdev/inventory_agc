@@ -1,0 +1,58 @@
+{% extends 'backend/main_layout.html' %}
+{% load static %}
+{% block title %} เพิ่มสินค้าใหม่ {% endblock %}
+{% block content %}
+
+<div class="card mx-4 my-5">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>เพิ่มสินค้าใหม่</h4>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="{% url 'product' %}" class="btn btn-secondary">กลับหน้ารายการ</a>
+            </div>
+        </div>
+    </div><!-- card-header -->
+
+    <!-- Create Product Form -->
+    <form method="POST" action="{% url 'create_product' %}" class="my-4 mx-4">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="product_name">Product Name:</label>
+            <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Product Name">
+        </div>
+        <div class="form-group">
+            <label for="product_detail">Product Detail:</label>
+            <textarea class="form-control" id="product_detail" name="product_detail" placeholder="Product Detail"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="product_barcode">Product Barcode:</label>
+            <input type="number" class="form-control" id="product_barcode" name="product_barcode" placeholder="Product Barcode">
+        </div>
+        <div class="form-group">
+            <label for="product_price">Product Price:</label>
+            <input type="number" class="form-control" id="product_price" name="product_price" placeholder="Product Price">
+        </div>
+        <div class="form-group">
+            <label for="product_qty">Product Qty:</label>
+            <input type="number" class="form-control" id="product_qty" name="product_qty" placeholder="Product Qty">
+        </div>
+        <div class="form-group">
+            <label for="product_image">Product Image:</label>
+            <input type="text" class="form-control" id="product_image" name="product_image" placeholder="Product Image">
+        </div>
+        <div class="form-group">
+            <label for="product_status">Product Status:</label>
+            <input type="number" class="form-control" id="product_status" name="product_status" placeholder="Product Status">
+        </div>
+
+        <!-- Add other fields -->
+    
+        <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+    </form>
+
+
+</div>
+{% endblock %}

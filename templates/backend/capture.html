@@ -1,0 +1,50 @@
+{% extends 'backend/main_layout.html' %}
+{% load static %}
+{% block title %} WebCam {% endblock %}
+{% block content %}
+
+<div class="card mx-4 my-5">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>WebCam Capture</h4>
+            </div>
+        </div>
+    </div><!-- card-header -->
+
+    <h1>Webcam Capture</h1>
+    <div>
+        <video id="video-preview" autoplay></video>
+    </div>
+    <div>
+        <img id="captured-image" src="{% if image_data %}data:image/jpeg;base64,{{ image_data }}{% endif %}">
+    </div>
+    <button id="capture-btn">Capture Image</button>
+
+</div>
+
+{% endblock %}
+
+{% block footer_scripts  %}
+    {{ block.super }}
+    <script>
+        $(document).ready(function () {
+            const videoElement = document.getElementById('video-preview');
+
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    videoElement.srcObject = stream;
+                })
+                .catch(function (error) {
+                    console.error('Error accessing the camera:', error);
+                });
+
+            $('#capture-btn').click(function () {
+                $.post('', function (data) {
+                    $('#captured-image').attr('src', 'data:image/jpeg;base64,' + data);
+                });
+            });
+        });
+    </script>
+{% endblock %}
+

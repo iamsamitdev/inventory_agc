@@ -20,35 +20,39 @@
                 <h1 class="h4 text-gray-900 mb-4">เข้าสู่ระบบ</h1>
               </div>
 
-              {% if messages %}
-                  {% for message in messages %}
-                      {{ message|safe }}
+              {% if form.non_field_errors %}
+                <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                  {% for error in form.non_field_errors %}
+                        {{ error }}
                   {% endfor %}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
               {% endif %}
 
-              <form class="user" action="/login" method="post">
+              <form class="user" action="{% url 'login' %}" method="post" novalidate>
                 {% csrf_token %}
+
                 <div class="form-group">
-                  <input type="text" 
-                  class="form-control form-control-user" 
-                  id="username" 
-                  name ="username" 
-                  placeholder="Username">
+                  {{ form.username }}
                 </div>
+
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-user" 
-                  id="password" 
-                  name="password"
-                  placeholder="Password">
+                  {{ form.password }}
                 </div>
+
                 <div class="form-group">
                   <div class="custom-control custom-checkbox small">
                     <input type="checkbox" class="custom-control-input" id="customCheck">
                     <label class="custom-control-label" for="customCheck">จำฉันไว้</label>
                   </div>
                 </div>
+
                 <input type="submit" value="เข้าสู่ระบบ" class="btn btn-primary btn-user btn-block" />
+
               </form>
+
               <div class="text-center mt-3">
                 <hr>
                 <a href="{% url 'register' %}">สมัครสมาชิก</a>

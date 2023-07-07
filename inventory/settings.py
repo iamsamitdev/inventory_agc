@@ -16,8 +16,11 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SESSION and COOKE AGE
-SESSION_COOKIE_AGE = 60 * 60 * 24 # 1 day
+# กำหนดเวลาในการเก็บข้อมูลใน session
+SESSION_COOKIE_AGE = 60 * 60 * 24  # 1 day in seconds
+
+# กำหนด session ให้เก็บข้อมูลทุกครั้งที่มีการ request
+SESSION_SAVE_EVERY_REQUEST = False  # default False
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'stock.apps.StockConfig',
+    'ckeditor',  # ใช้งาน ckeditor
 ]
 
 MIDDLEWARE = [
@@ -101,20 +105,20 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+# AUTH_PASSWORD_VALIDATORS = [
+#     # {
+#     #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+#     # },
+#     # {
+#     #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+#     # },
+#     # {
+#     #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+#     # },
+#     # {
+#     #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+#     # },
+# ]
 
 
 # Internationalization
@@ -135,7 +139,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'), # เพิ่ม static
+    os.path.join(BASE_DIR, 'static'),  # เพิ่ม static
 ]
 
 # Default primary key field type
