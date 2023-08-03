@@ -86,35 +86,34 @@ def product(request):
 # ฟังก์ชันเรียกหน้า create_product.html
 @login_required(login_url='login')
 def create_product(request):
-    if request.method == 'POST':
-        # Retrieve data from the request
-        product_name = request.POST['product_name']
-        product_detail = request.POST['product_detail']
-        product_barcode = request.POST['product_barcode']
-        product_qty = request.POST['product_qty']
-        product_price = request.POST['product_price']
-        product_image = request.POST['product_image']
-        product_status = request.POST['product_status']
-
-        # Create a new product instance
-        product = Product(
-            product_name=product_name,
-            product_detail=product_detail,
-            product_barcode=product_barcode,
-            product_qty=product_qty,
-            product_price=product_price,
-            product_image=product_image,
-            product_status=product_status
-        )
-
-        # Save the product to the database
-        product.save()
-
-        # Optionally, you can redirect to a success page or return a response
-        return redirect('product')
-    else:
+    if request.method != 'POST':
         # Render the form to create a new product
         return render(request, 'backend/create_product.html')
+    # Retrieve data from the request
+    product_name = request.POST['product_name']
+    product_detail = request.POST['product_detail']
+    product_barcode = request.POST['product_barcode']
+    product_qty = request.POST['product_qty']
+    product_price = request.POST['product_price']
+    product_image = request.POST['product_image']
+    product_status = request.POST['product_status']
+
+    # Create a new product instance
+    product = Product(
+        product_name=product_name,
+        product_detail=product_detail,
+        product_barcode=product_barcode,
+        product_qty=product_qty,
+        product_price=product_price,
+        product_image=product_image,
+        product_status=product_status
+    )
+
+    # Save the product to the database
+    product.save()
+
+    # Optionally, you can redirect to a success page or return a response
+    return redirect('product')
 
 
 # ฟังก์ชันออกจากระบบ
@@ -144,9 +143,6 @@ def chart(request):
 
 # ฟังก์ชันแสดง video webcam
 @login_required(login_url='login')
-# class WebcamCaptureView(View):
-#     def get(self, request):
-#         return render(request, 'backend/capture.html', {'image_data': None})
 def capture(request):
     # Open the webcam
     cap = cv2.VideoCapture(0)
@@ -164,8 +160,8 @@ def capture(request):
     response = HttpResponse(content_type='image/jpeg')
     # Save the image to a static path
     # random name for image with random number
-    image_name = str(random.randint(1, 100000)) + '.jpg'
-    cv2.imwrite('static/images/'+image_name, frame)
+    image_name = f'{random.randint(1, 100000)}.jpg'
+    cv2.imwrite(f'static/images/{image_name}', frame)
 
     # return response
     return render(request, 'backend/capture.html', {'image_data': response})
